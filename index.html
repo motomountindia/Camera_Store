@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MotoMountIndia — Camera Mounts for Riders</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFFFFF;
+    --bg-tint:#F5F8FC;
+    --panel:#FFFFFF;
+    --card:#FFFFFF;
+    --ink:#141821;
+    --ink-dim:#5B6472;
+    --line:#E4E8EE;
+    --blue:#16305C;
+    --blue-deep:#0D2145;
+    --red:#E1362F;
+    --red-deep:#B72922;
+    --whatsapp:#25D366;
+    --radius:10px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:'JetBrains Mono',monospace;}
+  .display{font-family:'Rajdhani',sans-serif;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    padding:64px 24px 84px;
+    overflow:hidden;
+    background:var(--blue-deep);
+    color:#fff;
+  }
+  .stripe{
+    position:absolute;
+    top:0; bottom:0;
+    width:140%;
+    transform:skewX(-14deg);
+  }
+  .stripe.red{ background:var(--red); left:-18%; opacity:0.9; }
+  .stripe.blue{ background:var(--blue); left:2%; opacity:0.55; }
+  .hero-inner{
+    position:relative;
+    z-index:2;
+    max-width:920px;
+    margin:0 auto;
+    text-align:center;
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:#fff;
+    opacity:0.85;
+    margin-bottom:16px;
+  }
+  .brand-title{
+    font-family:'Rajdhani',sans-serif;
+    font-weight:700;
+    font-size:clamp(38px,7.5vw,72px);
+    line-height:1;
+    letter-spacing:0.01em;
+    text-transform:uppercase;
+    margin:0 0 18px;
+    color:#fff;
+  }
+  .brand-title .accent{ color:#FFD8D6; }
+  .hero p.sub{
+    color:#DCE4F0;
+    font-size:16.5px;
+    max-width:520px;
+    margin:0 auto 32px;
+    line-height:1.6;
+  }
+  .cta-btn{
+    background:#fff;
+    color:var(--blue-deep);
+    border:none;
+    font-family:'Rajdhani',sans-serif;
+    font-weight:700;
+    font-size:16px;
+    letter-spacing:0.02em;
+    text-transform:uppercase;
+    padding:13px 30px;
+    border-radius:6px;
+    cursor:pointer;
+    transition:transform .15s ease, background .15s ease;
+  }
+  .cta-btn:hover{background:#FFD8D6; transform:translateY(-1px);}
+
+  /* ---------- PRODUCTS ---------- */
+  .section{max-width:1080px;margin:0 auto;padding:52px 24px 96px;}
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    margin-bottom:26px;
+    border-bottom:3px solid var(--blue-deep);
+    padding-bottom:12px;
+  }
+  .section-head h2{
+    font-family:'Rajdhani',sans-serif;
+    font-size:24px;
+    text-transform:uppercase;
+    letter-spacing:0.02em;
+    margin:0;
+    color:var(--blue-deep);
+  }
+  .section-head span{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    color:var(--ink-dim);
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(230px, 1fr));
+    gap:20px;
+  }
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-top:3px solid var(--red);
+    border-radius:var(--radius);
+    padding:18px;
+    display:flex;
+    flex-direction:column;
+    box-shadow:0 1px 2px rgba(20,24,33,0.04);
+    transition:box-shadow .15s ease, transform .15s ease;
+  }
+  .card:hover{box-shadow:0 8px 20px rgba(20,24,33,0.10); transform:translateY(-2px);}
+  .thumb{
+    aspect-ratio:1/1;
+    border-radius:8px;
+    margin-bottom:14px;
+    background:var(--bg-tint);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .thumb svg{width:46%; height:46%;}
+  .card h3{
+    font-family:'Rajdhani',sans-serif;
+    font-size:18px;
+    font-weight:700;
+    margin:0 0 6px;
+    color:var(--ink);
+  }
+  .card p.desc{
+    color:var(--ink-dim);
+    font-size:13px;
+    line-height:1.5;
+    margin:0 0 16px;
+    flex-grow:1;
+  }
+  .card .row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .price{
+    font-family:'JetBrains Mono',monospace;
+    font-size:15px;
+    color:var(--blue-deep);
+    font-weight:600;
+  }
+  .add-btn{
+    background:var(--blue-deep);
+    border:1px solid var(--blue-deep);
+    color:#fff;
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    font-size:13px;
+    padding:8px 14px;
+    border-radius:7px;
+    cursor:pointer;
+    transition:background .15s ease;
+  }
+  .add-btn:hover{background:var(--red); border-color:var(--red);}
+  .add-btn.added{background:#1E8E3E; border-color:#1E8E3E;}
+
+  /* ---------- CART FAB ---------- */
+  .cart-fab{
+    position:fixed;
+    bottom:24px;
+    right:24px;
+    background:var(--red);
+    color:#fff;
+    border:none;
+    border-radius:50px;
+    padding:14px 22px;
+    font-family:'Rajdhani',sans-serif;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.02em;
+    font-size:15px;
+    display:flex;
+    align-items:center;
+    gap:9px;
+    cursor:pointer;
+    box-shadow:0 6px 20px rgba(225,54,47,0.35);
+    z-index:40;
+    transition:transform .15s ease, background .15s ease;
+  }
+  .cart-fab:hover{background:var(--red-deep); transform:translateY(-2px);}
+  .cart-count{
+    background:#fff;
+    color:var(--red);
+    border-radius:50%;
+    width:22px;height:22px;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+  }
+
+  /* ---------- CART DRAWER ---------- */
+  .overlay{
+    position:fixed; inset:0;
+    background:rgba(13,33,69,0.35);
+    opacity:0; pointer-events:none;
+    transition:opacity .2s ease;
+    z-index:50;
+  }
+  .overlay.open{opacity:1; pointer-events:auto;}
+  .drawer{
+    position:fixed;
+    top:0; right:0;
+    height:100%;
+    width:min(400px, 92vw);
+    background:#fff;
+    border-left:1px solid var(--line);
+    transform:translateX(100%);
+    transition:transform .25s ease;
+    z-index:51;
+    display:flex;
+    flex-direction:column;
+    box-shadow:-8px 0 24px rgba(13,33,69,0.12);
+  }
+  .drawer.open{transform:translateX(0);}
+  .drawer-head{
+    padding:20px 22px;
+    border-bottom:1px solid var(--line);
+    background:var(--blue-deep);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .drawer-head h3{font-family:'Rajdhani',sans-serif; margin:0; font-size:19px; color:#fff; text-transform:uppercase; letter-spacing:0.02em;}
+  .close-btn{
+    background:none; border:none; color:#fff;
+    font-size:22px; cursor:pointer; line-height:1; opacity:0.85;
+  }
+  .close-btn:hover{opacity:1;}
+  .drawer-body{flex:1; overflow-y:auto; padding:16px 22px;}
+  .empty-note{color:var(--ink-dim); font-size:14px; padding:40px 0; text-align:center;}
+  .line-item{
+    display:flex;
+    gap:12px;
+    padding:14px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .li-thumb{
+    width:48px;height:48px;border-radius:6px;flex-shrink:0;
+    background:var(--bg-tint);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .li-thumb svg{width:55%;height:55%;}
+  .li-info{flex:1;}
+  .li-info h4{margin:0 0 4px; font-size:14px; font-family:'Rajdhani',sans-serif; font-weight:700; color:var(--ink);}
+  .li-controls{display:flex; align-items:center; gap:10px; margin-top:6px;}
+  .qty-btn{
+    background:var(--bg-tint); border:1px solid var(--line); color:var(--ink);
+    width:22px;height:22px;border-radius:5px;cursor:pointer;font-size:13px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .qty-btn:hover{border-color:var(--blue-deep);}
+  .qty-val{font-family:'JetBrains Mono',monospace; font-size:13px; min-width:16px; text-align:center;}
+  .remove-link{
+    font-size:12px; color:var(--ink-dim); background:none; border:none;
+    cursor:pointer; text-decoration:underline; margin-left:auto;
+  }
+  .remove-link:hover{color:var(--red);}
+  .li-price{font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--blue-deep); font-weight:600; white-space:nowrap;}
+
+  .drawer-foot{
+    border-top:1px solid var(--line);
+    padding:18px 22px 22px;
+  }
+  .subtotal-row{
+    display:flex; justify-content:space-between; align-items:baseline;
+    margin-bottom:14px;
+  }
+  .subtotal-row span:first-child{color:var(--ink-dim); font-size:13px;}
+  .subtotal-row span:last-child{font-family:'JetBrains Mono',monospace; font-size:19px; color:var(--ink); font-weight:600;}
+  .checkout-btn{
+    width:100%;
+    background:var(--whatsapp);
+    color:#fff;
+    border:none;
+    font-family:'Rajdhani',sans-serif;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.02em;
+    font-size:16px;
+    padding:14px;
+    border-radius:var(--radius);
+    cursor:pointer;
+    display:flex; align-items:center; justify-content:center; gap:8px;
+    transition:background .15s ease;
+  }
+  .checkout-btn:hover{background:#1fb958;}
+  .checkout-btn:disabled{background:#D9DEE6; color:#9098A6; cursor:not-allowed;}
+  .pay-note{
+    font-size:11.5px;
+    color:var(--ink-dim);
+    line-height:1.5;
+    margin-top:12px;
+  }
+
+  footer{
+    text-align:center;
+    padding:28px 24px 44px;
+    color:var(--ink-dim);
+    font-size:12px;
+    border-top:1px solid var(--line);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="stripe red"></div>
+  <div class="stripe blue"></div>
+  <div class="hero-inner">
+    <div class="eyebrow mono">// ride-ready camera mounts</div>
+    <h1 class="brand-title" id="brandTitle">Moto<span class="accent">Mount</span>India</h1>
+    <p class="sub">3D-printed mounts, cages and grips built for the road — order in a tap, confirm on WhatsApp.</p>
+    <button class="cta-btn" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">Browse products</button>
+  </div>
+</div>
+
+<div class="section" id="products">
+  <div class="section-head">
+    <h2>Catalog</h2>
+    <span class="mono" id="itemCountLabel">0 items</span>
+  </div>
+  <div class="grid" id="productGrid"></div>
+</div>
+
+<footer>
+  Orders are confirmed over WhatsApp · Payment details shared after order confirmation
+</footer>
+
+<button class="cart-fab" id="cartFab" onclick="openCart()">
+  Cart <span class="cart-count" id="cartCount">0</span>
+</button>
+
+<div class="overlay" id="overlay" onclick="closeCart()"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-head">
+    <h3>Your cart</h3>
+    <button class="close-btn" onclick="closeCart()">&times;</button>
+  </div>
+  <div class="drawer-body" id="drawerBody">
+    <div class="empty-note">Your cart is empty</div>
+  </div>
+  <div class="drawer-foot">
+    <div class="subtotal-row">
+      <span>Subtotal</span>
+      <span id="subtotalVal">₹0</span>
+    </div>
+    <button class="checkout-btn" id="checkoutBtn" onclick="checkoutOnWhatsApp()" disabled>
+      Checkout on WhatsApp
+    </button>
+    <div class="pay-note">Tapping checkout opens WhatsApp with your order pre-filled. Payment (UPI / link) is shared once the order is confirmed there.</div>
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   CONFIG — edit these three things to make this yours
+   ========================================================= */
+const CONFIG = {
+  storeName: "MotoMountIndia",             // shown in the hero title
+  whatsappNumber: "91XXXXXXXXXX",          // country code + number, no + or spaces
+  currency: "₹"
+};
+
+const PRODUCTS = [
+  { id:"p1", name:"Cold-Shoe Cage Mount", price:899,  desc:"Snap-fit cage with dual cold-shoe rails for mic + light." },
+  { id:"p2", name:"L-Bracket Grip",       price:649,  desc:"Low-profile L-bracket for portrait/landscape quick swap." },
+  { id:"p3", name:"Lens Cap Holder",      price:249,  desc:"Clips to your strap, keeps the cap from wandering off." },
+  { id:"p4", name:"Tripod Quick Plate",   price:399,  desc:"Arca-compatible plate, printed in tough PETG." },
+  { id:"p5", name:"Cable Clip Set (x6)",  price:199,  desc:"Keeps HDMI/USB-C runs tidy on rigs and desks." },
+  { id:"p6", name:"Lens Hood Adapter",    price:349,  desc:"Reversible mount for third-party hoods on your body cap." }
+];
+
+/* ========================================================= */
+
+document.title = CONFIG.storeName + " — Camera Mounts for Riders";
+
+let cart = {}; // { productId: qty }
+
+function iconSvg(){
+  return `<svg viewBox="0 0 24 24" fill="none" stroke="#16305C" stroke-width="1.5">
+    <rect x="3" y="7" width="18" height="13" rx="2"/>
+    <circle cx="12" cy="13.5" r="3.4"/>
+    <path d="M8 7l1.2-2.2A1.5 1.5 0 0110.5 4h3a1.5 1.5 0 011.3.8L16 7"/>
+  </svg>`;
+}
+
+function renderProducts(){
+  const grid = document.getElementById("productGrid");
+  grid.innerHTML = PRODUCTS.map(p => `
+    <div class="card">
+      <div class="thumb">${iconSvg()}</div>
+      <h3>${p.name}</h3>
+      <p class="desc">${p.desc}</p>
+      <div class="row">
+        <span class="price">${CONFIG.currency}${p.price}</span>
+        <button class="add-btn" id="btn-${p.id}" onclick="addToCart('${p.id}')">Add</button>
+      </div>
+    </div>
+  `).join("");
+  document.getElementById("itemCountLabel").textContent = PRODUCTS.length + " items";
+}
+
+function addToCart(id){
+  cart[id] = (cart[id] || 0) + 1;
+  const btn = document.getElementById("btn-"+id);
+  btn.textContent = "Added";
+  btn.classList.add("added");
+  setTimeout(()=>{ btn.textContent="Add"; btn.classList.remove("added"); }, 900);
+  renderCart();
+}
+
+function changeQty(id, delta){
+  if(!cart[id]) return;
+  cart[id] += delta;
+  if(cart[id] <= 0) delete cart[id];
+  renderCart();
+}
+
+function removeItem(id){
+  delete cart[id];
+  renderCart();
+}
+
+function renderCart(){
+  const body = document.getElementById("drawerBody");
+  const ids = Object.keys(cart);
+  const totalCount = ids.reduce((s,id)=>s+cart[id],0);
+  document.getElementById("cartCount").textContent = totalCount;
+
+  if(ids.length === 0){
+    body.innerHTML = `<div class="empty-note">Your cart is empty</div>`;
+    document.getElementById("subtotalVal").textContent = CONFIG.currency + "0";
+    document.getElementById("checkoutBtn").disabled = true;
+    return;
+  }
+
+  let subtotal = 0;
+  body.innerHTML = ids.map(id=>{
+    const p = PRODUCTS.find(x=>x.id===id);
+    const lineTotal = p.price * cart[id];
+    subtotal += lineTotal;
+    return `
+      <div class="line-item">
+        <div class="li-thumb">${iconSvg()}</div>
+        <div class="li-info">
+          <h4>${p.name}</h4>
+          <div class="li-controls">
+            <button class="qty-btn" onclick="changeQty('${id}',-1)">−</button>
+            <span class="qty-val">${cart[id]}</span>
+            <button class="qty-btn" onclick="changeQty('${id}',1)">+</button>
+            <button class="remove-link" onclick="removeItem('${id}')">remove</button>
+          </div>
+        </div>
+        <div class="li-price">${CONFIG.currency}${lineTotal}</div>
+      </div>
+    `;
+  }).join("");
+
+  document.getElementById("subtotalVal").textContent = CONFIG.currency + subtotal;
+  document.getElementById("checkoutBtn").disabled = false;
+}
+
+function openCart(){
+  document.getElementById("drawer").classList.add("open");
+  document.getElementById("overlay").classList.add("open");
+}
+function closeCart(){
+  document.getElementById("drawer").classList.remove("open");
+  document.getElementById("overlay").classList.remove("open");
+}
+
+function checkoutOnWhatsApp(){
+  const ids = Object.keys(cart);
+  if(ids.length === 0) return;
+
+  let subtotal = 0;
+  let lines = ids.map(id=>{
+    const p = PRODUCTS.find(x=>x.id===id);
+    const lineTotal = p.price * cart[id];
+    subtotal += lineTotal;
+    return `• ${p.name} x${cart[id]} — ${CONFIG.currency}${lineTotal}`;
+  });
+
+  const message =
+`Hi ${CONFIG.storeName}, I'd like to order:
+
+${lines.join("\n")}
+
+Subtotal: ${CONFIG.currency}${subtotal}
+
+Please share payment details to confirm.`;
+
+  const url = `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;
+  window.open(url, "_blank");
+}
+
+renderProducts();
+renderCart();
+</script>
+
+</body>
+</html>
