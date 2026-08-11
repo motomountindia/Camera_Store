@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -147,8 +148,10 @@
     display:flex;
     align-items:center;
     justify-content:center;
+    overflow:hidden;
   }
   .thumb svg{width:46%; height:46%;}
+  .thumb img{width:100%; height:100%; object-fit:cover; border-radius:8px;}
   .card h3{
     font-family:'Rajdhani',sans-serif;
     font-size:18px;
@@ -273,8 +276,10 @@
     width:48px;height:48px;border-radius:6px;flex-shrink:0;
     background:var(--bg-tint);
     display:flex;align-items:center;justify-content:center;
+    overflow:hidden;
   }
   .li-thumb svg{width:55%;height:55%;}
+  .li-thumb img{width:100%; height:100%; object-fit:cover;}
   .li-info{flex:1;}
   .li-info h4{margin:0 0 4px; font-size:14px; font-family:'Rajdhani',sans-serif; font-weight:700; color:var(--ink);}
   .li-controls{display:flex; align-items:center; gap:10px; margin-top:6px;}
@@ -403,7 +408,7 @@ const CONFIG = {
 const PRODUCTS = [
   { id:"p1", name:"Triggers", price:250,  desc:"Snap-fit on top of the cage for the DJI Action 3,4 & 5.", image:"Trigger.jpg" },
   { id:"p2", name:"VideoGraphy-Kit",       price:450,  desc:"3D Printed Grip that attaches on the side and the trigger to shoot.", image:"Kit.jpg" },
- 
+
 ];
 
 /* ========================================================= */
@@ -420,11 +425,15 @@ function iconSvg(){
   </svg>`;
 }
 
+function thumbContent(p){
+  return p.image ? `<img src="${p.image}" alt="${p.name}">` : iconSvg();
+}
+
 function renderProducts(){
   const grid = document.getElementById("productGrid");
   grid.innerHTML = PRODUCTS.map(p => `
     <div class="card">
-      <div class="thumb">${iconSvg()}</div>
+      <div class="thumb">${thumbContent(p)}</div>
       <h3>${p.name}</h3>
       <p class="desc">${p.desc}</p>
       <div class="row">
@@ -477,7 +486,7 @@ function renderCart(){
     subtotal += lineTotal;
     return `
       <div class="line-item">
-        <div class="li-thumb">${iconSvg()}</div>
+        <div class="li-thumb">${thumbContent(p)}</div>
         <div class="li-info">
           <h4>${p.name}</h4>
           <div class="li-controls">
