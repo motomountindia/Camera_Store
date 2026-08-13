@@ -260,6 +260,19 @@
     justify-content:center;
     overflow:hidden;
   }
+  .tag-pill{
+    position:absolute;
+    top:10px; left:10px;
+    z-index:2;
+    background:var(--blue-deep);
+    color:#fff;
+    font-family:'JetBrains Mono',monospace;
+    font-size:9.5px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    padding:4px 9px;
+    border-radius:5px;
+  }
   .thumb svg{width:46%; height:46%;}
   .thumb img{width:100%; height:100%; object-fit:cover;}
   .card h3{
@@ -529,6 +542,97 @@
   .insta-link:hover{ border-color:var(--red); transform:translateY(-1px); }
   .insta-link svg{width:16px; height:16px;}
 
+  /* ---------- MOBILE HEADER ---------- */
+  .mobile-header{
+    display:none;
+    position:sticky;
+    top:0;
+    z-index:45;
+    align-items:center;
+    justify-content:space-between;
+    background:#fff;
+    border-bottom:1px solid var(--line);
+    padding:12px 16px;
+  }
+  .mobile-header-brand{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    font-family:'Rajdhani',sans-serif;
+    font-weight:700;
+    font-size:16px;
+    color:var(--blue-deep);
+    text-transform:uppercase;
+    letter-spacing:0.02em;
+  }
+  .mobile-logo{
+    width:30px; height:30px;
+    border-radius:50%;
+    background:var(--blue-deep);
+    color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Rajdhani',sans-serif;
+    font-weight:700;
+    font-size:15px;
+    flex-shrink:0;
+  }
+  .mobile-cart-btn{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    background:var(--blue-deep);
+    color:#fff;
+    border:none;
+    padding:8px 14px;
+    border-radius:50px;
+    font-family:'Rajdhani',sans-serif;
+    font-weight:700;
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:0.02em;
+    cursor:pointer;
+  }
+  .mobile-cart-btn svg{ width:16px; height:16px; }
+  .mobile-cart-count{
+    background:var(--red);
+    color:#fff;
+    border-radius:50%;
+    width:18px; height:18px;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px;
+  }
+
+  /* ---------- MOBILE BOTTOM CART BAR ---------- */
+  .mobile-bottom-bar{
+    display:none;
+    position:fixed;
+    left:0; right:0; bottom:0;
+    z-index:46;
+    background:var(--blue-deep);
+    color:#fff;
+    padding:14px 18px;
+    align-items:center;
+    justify-content:space-between;
+    box-shadow:0 -6px 20px rgba(13,33,69,0.25);
+  }
+  .mbb-info{ display:flex; flex-direction:column; gap:2px; }
+  .mbb-count{ font-size:12.5px; opacity:0.8; }
+  .mbb-sub{ font-family:'JetBrains Mono',monospace; font-size:17px; font-weight:600; }
+  .mbb-btn{
+    background:var(--red);
+    color:#fff;
+    border:none;
+    font-family:'Rajdhani',sans-serif;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.02em;
+    font-size:14px;
+    padding:11px 20px;
+    border-radius:8px;
+    cursor:pointer;
+  }
+
   @media (prefers-reduced-motion: reduce){
     *{transition:none !important;}
   }
@@ -540,8 +644,13 @@
   }
 
   @media (max-width: 600px){
-    .top-strip{ font-size:10px; padding:6px 10px; }
-    .hero{ padding:44px 18px 56px; }
+    .top-strip{ display:none; }
+    .mobile-header{ display:flex; }
+    .cart-fab{ display:none; }
+    .mobile-bottom-bar.show{ display:flex; }
+    body{ padding-bottom:0; }
+
+    .hero{ padding:36px 18px 46px; }
     .eyebrow-pill{ font-size:10px; padding:6px 12px; margin-bottom:16px; }
     .brand-title{ font-size:clamp(28px, 9vw, 40px); margin-bottom:14px; }
     .hero p.sub{ font-size:14.5px; margin-bottom:22px; }
@@ -549,7 +658,7 @@
     .trust-row{ gap:8px; margin-top:26px; }
     .trust-chip{ font-size:11px; padding:7px 11px; }
 
-    .section{ padding:32px 16px 28px; }
+    .section{ padding:32px 16px 90px; }
     .section-head h2{ font-size:20px; }
     .grid{ grid-template-columns:1fr 1fr; gap:12px; }
     .card{ padding:12px; border-radius:12px; }
@@ -558,11 +667,11 @@
     .price{ font-size:13px; }
     .add-btn{ font-size:11.5px; padding:7px 11px; }
     .badge{ font-size:9px; padding:3px 8px; top:10px; right:10px; }
+    .tag-pill{ font-size:8.5px; padding:3px 7px; top:8px; left:8px; }
 
     .how-inner{ padding:40px 16px; }
     .step{ padding:18px 16px; }
 
-    .cart-fab{ padding:11px 16px; font-size:13px; bottom:16px; right:16px; }
     .drawer{ width:100vw; }
   }
 
@@ -572,6 +681,17 @@
 </style>
 </head>
 <body>
+
+<div class="mobile-header">
+  <div class="mobile-header-brand">
+    <div class="mobile-logo">M</div>
+    <span>MotoMountIndia</span>
+  </div>
+  <button class="mobile-cart-btn" onclick="openCart()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
+    Cart <span class="mobile-cart-count" id="mobileCartCount">0</span>
+  </button>
+</div>
 
 <div class="top-strip">🏍️ <b>Free design tweaks</b> on custom mount requests — just ask on WhatsApp</div>
 
@@ -585,7 +705,7 @@
     <button class="cta-btn" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">Browse Products →</button>
 
     <div class="trust-row">
-      <div class="trust-chip"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg> Trusted by 100s of riders</div>
+      <div class="trust-chip"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg> Trusted by hundreds of riders</div>
       <div class="trust-chip"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M12 2l2.4 6.6L21 10l-5 4.4L17.4 21 12 17.3 6.6 21 8 14.4 3 10l6.6-1.4z"/></svg> Precision fit</div>
       <div class="trust-chip"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.4 8.7-8 10-4.6-1.3-8-5-8-10V6z"/></svg> Built tough</div>
       <div class="trust-chip"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M21 11.5a8.5 8.5 0 01-12.3 7.6L4 20l1-4.6A8.5 8.5 0 1121 11.5z"/></svg> Order on WhatsApp</div>
@@ -660,6 +780,14 @@
 </button>
 
 <div class="overlay" id="overlay" onclick="closeCart()"></div>
+
+<div class="mobile-bottom-bar" id="mobileBottomBar">
+  <div class="mbb-info">
+    <span class="mbb-count" id="mbbCount">0 items</span>
+    <span class="mbb-sub" id="mbbSubtotal">₹0</span>
+  </div>
+  <button class="mbb-btn" onclick="openCart()">View Cart →</button>
+</div>
 <div class="drawer" id="drawer">
   <div class="drawer-head">
     <h3>Your cart</h3>
@@ -692,8 +820,8 @@ const CONFIG = {
 };
 
 const PRODUCTS = [
-  { id:"p1", name:"Triggers", price:250,  desc:"Snap-fit on top of the cage for the DJI Action 3,4 & 5.", image:"Trigger.jpg", badge:"Bestseller" },
-  { id:"p2", name:"VideoGraphy-Kit",       price:450,  desc:"3D Printed Grip that attaches on the side and the trigger to shoot.", image:"Kit.jpg" },
+  { id:"p1", name:"Pair of Triggers", price:250,  desc:"Snap-fit on top of the cage for the DJI Action 3,4 & 5.", image:"Trigger.jpg", badge:"Bestseller", tag:"Mounts" },
+  { id:"p2", name:"VideoGraphy-Kit",       price:450,  desc:"3D Printed Grip that attaches on the side and the trigger to shoot.", image:"Kit.jpg", tag:"Kits" },
 
 ];
 
@@ -720,12 +848,15 @@ function renderProducts(){
   grid.innerHTML = PRODUCTS.map(p => `
     <div class="card">
       ${p.badge ? `<div class="badge">${p.badge}</div>` : ""}
-      <div class="thumb">${thumbContent(p)}</div>
+      <div class="thumb">
+        ${p.tag ? `<span class="tag-pill">${p.tag}</span>` : ""}
+        ${thumbContent(p)}
+      </div>
       <h3>${p.name}</h3>
       <p class="desc">${p.desc}</p>
       <div class="row">
         <span class="price">${p.price}</span>
-        <button class="add-btn" id="btn-${p.id}" onclick="addToCart('${p.id}')">Add</button>
+        <button class="add-btn" id="btn-${p.id}" onclick="addToCart('${p.id}')">+ Add</button>
       </div>
     </div>
   `).join("");
@@ -737,7 +868,7 @@ function addToCart(id){
   const btn = document.getElementById("btn-"+id);
   btn.textContent = "Added";
   btn.classList.add("added");
-  setTimeout(()=>{ btn.textContent="Add"; btn.classList.remove("added"); }, 900);
+  setTimeout(()=>{ btn.textContent="+ Add"; btn.classList.remove("added"); }, 900);
   renderCart();
 }
 
@@ -758,11 +889,15 @@ function renderCart(){
   const ids = Object.keys(cart);
   const totalCount = ids.reduce((s,id)=>s+cart[id],0);
   document.getElementById("cartCount").textContent = totalCount;
+  document.getElementById("mobileCartCount").textContent = totalCount;
+
+  const bottomBar = document.getElementById("mobileBottomBar");
 
   if(ids.length === 0){
     body.innerHTML = `<div class="empty-note">Your cart is empty</div>`;
     document.getElementById("subtotalVal").textContent = CONFIG.currency + "0";
     document.getElementById("checkoutBtn").disabled = true;
+    bottomBar.classList.remove("show");
     return;
   }
 
@@ -790,6 +925,10 @@ function renderCart(){
 
   document.getElementById("subtotalVal").textContent = CONFIG.currency + subtotal;
   document.getElementById("checkoutBtn").disabled = false;
+
+  document.getElementById("mbbCount").textContent = totalCount + (totalCount === 1 ? " item" : " items");
+  document.getElementById("mbbSubtotal").textContent = CONFIG.currency + subtotal;
+  bottomBar.classList.add("show");
 }
 
 function openCart(){
